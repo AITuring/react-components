@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState, useRef, useEffect } from 'react';
+import MiniCalendar from './components/MiniCalendar';
+import { MiniCalendarRef } from './components/MiniCalendar';
 
-function App() {
+const App = () => {
+  const miniCalendarRef = useRef<MiniCalendarRef>(null);
+
+  useEffect(() => {
+    console.log(miniCalendarRef.current?.getDate().toLocaleDateString());
+
+    setTimeout(() => {
+      miniCalendarRef.current?.setDate(new Date(2024, 2, 1));
+    }, 3000);
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MiniCalendar value={new Date('2024-3-1')} onChange={(data: Date) => alert(data.toLocaleDateString())} />
+      <MiniCalendar value={new Date('2024-2-29')} ref={miniCalendarRef}  />
     </div>
-  );
-}
+  )
+};
 
 export default App;
