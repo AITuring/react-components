@@ -82,13 +82,13 @@ const MiniCalendar = forwardRef<MiniCalendarRef, MiniCalendarProps> ((props, ref
 
 
   return (
-    <div className="calendar">
-      <div className="flex justify-between items-center h-40">
+    <div className="h-[280px] w-[300px] p-[10px] m-[10px] border-[1px] border-solid border-gray-400 bg-gray-200">
+      <div className="h-[40px] flex justify-between items-center">
         <button onClick={handlePrevMonth}>&lt;</button>
         <div>{date.getFullYear()}年{monthNames[date.getMonth()]}</div>
         <button onClick={handleNextMonth}>&gt;</button>
       </div>
-      <div className="days">
+      <div className="flex flex-wrap">
         <div className="day">日</div>
         <div className="day">一</div>
         <div className="day">二</div>
