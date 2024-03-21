@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import Calendar from './components/Calendar';
 import MiniCalendar from './components/MiniCalendar';
 import { MiniCalendarRef } from './components/MiniCalendar';
 
@@ -15,6 +16,8 @@ const App = () => {
 
   return (
     <div className="App">
+      <h2>Components</h2>
+      <Calendar />
       <MiniCalendar value={new Date('2024-3-1')} onChange={(data: Date) => alert(data.toLocaleDateString())} />
       <MiniCalendar value={new Date('2024-2-29')} ref={miniCalendarRef}  />
     </div>
