@@ -83,7 +83,7 @@ const MiniCalendar = forwardRef<MiniCalendarRef, MiniCalendarProps> ((props, ref
 
   return (
     <div className="calendar">
-      <div className="header">
+      <div className="flex justify-between items-center h-40">
         <button onClick={handlePrevMonth}>&lt;</button>
         <div>{date.getFullYear()}年{monthNames[date.getMonth()]}</div>
         <button onClick={handleNextMonth}>&gt;</button>
