@@ -21,16 +21,18 @@ function getAllDays(date: Dayjs): Array<DayInfo> {
         date: startDate.subtract(day - i, 'day'),
         currentMonth: false
     }
-    // 计算当前日期 +1、+2、+3 的日期
-    for(let i = day ; i < daysInfo.length; i++) {
-      const calcDate = startDate.add(i - day, 'day');
+  }
 
-        daysInfo[i] = {
-            date: calcDate,
-            currentMonth: calcDate.month() === date.month()
-        }
+  // 计算当前日期 +1、+2、+3 的日期
+  for(let i = day ; i < daysInfo.length; i++) {
+    const calcDate = startDate.add(i - day, 'day');
+
+    daysInfo[i] = {
+        date: calcDate,
+        currentMonth: calcDate.month() === date.month()
+    }
   }
-  }
+
   console.log(daysInfo)
   return daysInfo;
 }
@@ -42,7 +44,7 @@ function renderDays(dayInfo: DayInfo[]) {
     for (let j =0; j < 7; j++) {
       const day = dayInfo[i * 7 + j];
       row[j] = <div
-      className={day.currentMonth ? "flex-1 border border-gray-300 p-3 text-gray-600" : "flex-1 border border-gray-50 p-3 text-gray-300"}
+      className={day.currentMonth ? "w-1/7 border border-gray-300 p-3 text-gray-600" : "w-1/7 border border-gray-300 p-3 text-gray-300"}
       >
         {day.date.date()}
       </div>
