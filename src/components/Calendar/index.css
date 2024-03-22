@@ -1,5 +1,4 @@
-/* .calendar {
-  width: 100%;
-  height: 200px;
-  background: #7d7d7f;
-} */
+.header-icon {
+  @apply w-7 h-7 leading-7 rounded-full text-center text-xs select-none cursor-pointer mx-3
+  first:ml-0 hover:bg-gray-400;
+}

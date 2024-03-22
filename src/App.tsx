@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import Calendar from './components/Calendar';
-import MiniCalendar from './components/MiniCalendar';
+// import MiniCalendar from './components/MiniCalendar';
 import { MiniCalendarRef } from './components/MiniCalendar';
 import dayjs from 'dayjs';
 
