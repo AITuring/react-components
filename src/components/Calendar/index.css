@@ -1,4 +1,4 @@
 .header-icon {
   @apply w-7 h-7 leading-7 rounded-full text-center text-xs select-none cursor-pointer mx-3
-  first:ml-0 hover:bg-gray-400;
+  first:ml-0 hover:bg-sky-400;
 }

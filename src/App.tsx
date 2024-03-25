@@ -8,7 +8,6 @@ const App = () => {
   const miniCalendarRef = useRef<MiniCalendarRef>(null);
 
   useEffect(() => {
-
     setTimeout(() => {
       miniCalendarRef.current?.setDate(new Date(2024, 2, 1));
     }, 3000);
@@ -16,16 +15,25 @@ const App = () => {
 
   return (
     <div className="App">
-      <h2 className='text-3xl text-cyan-900 text-center mb-5'>Components</h2>
-      <Calendar value={dayjs('2024-3-29')} dateInnerContent={(value) => {
-        return <div>
-          <p style={{background: 'yellowgreen', height: '30px'}}>{value.format('YYYY/MM/DD')}</p>
-        </div>
-      }}/>
+      <h2 className="text-3xl text-cyan-900 text-center mb-5">Components</h2>
+      <Calendar
+        value={dayjs('2024-3-29')}
+        onChange={(data: dayjs.Dayjs) => console.error(data.format('YYYY/MM/DD'))}
+        locale='en-US'
+        // dateInnerContent={(value) => {
+        //   return (
+        //     <div>
+        //       <p style={{ background: 'yellowgreen', padding: '2px 8px'}}>
+        //         {value.format('YYYY/MM/DD')}
+        //       </p>
+        //     </div>
+        //   );
+        // }}
+      />
       {/* <MiniCalendar value={new Date('2024-3-1')} onChange={(data: Date) => alert(data.toLocaleDateString())} />
       <MiniCalendar value={new Date('2024-2-29')} ref={miniCalendarRef}  /> */}
     </div>
-  )
+  );
 };
 
 export default App;

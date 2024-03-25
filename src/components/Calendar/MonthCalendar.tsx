@@ -1,15 +1,19 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Dayjs } from 'dayjs';
 import { CalendarProps } from '.';
 import { LocaleContext } from './LocaleContext';
 import allLocales from './locale';
 
-interface MonthCalendarProps extends CalendarProps {}
+interface MonthCalendarProps extends CalendarProps {
+  selectHandler: (date: Dayjs) => void;
+  curMonth: Dayjs;
+}
 
 interface DayInfo {
   date: Dayjs;
   currentMonth: boolean;
 }
+
 
 function getAllDays(date: Dayjs): Array<DayInfo> {
   const startDate = date.startOf('month');
@@ -35,7 +39,6 @@ function getAllDays(date: Dayjs): Array<DayInfo> {
     };
   }
 
-  console.log(daysInfo);
   return daysInfo;
 }
 
@@ -43,6 +46,8 @@ function renderDays(
   dayInfo: DayInfo[],
   dateRender: MonthCalendarProps['dateRender'],
   dateInnerContent: MonthCalendarProps['dateInnerContent'],
+  value: Dayjs,
+  selectHandler: MonthCalendarProps['selectHandler'],
 ) {
   const rows = [];
   for (let i = 0; i < 6; i++) {
@@ -56,17 +61,28 @@ function renderDays(
               ? 'w-1/7 border border-gray-300 text-gray-600 overflow-hidden'
               : 'w-1/7 border border-gray-300 text-gray-300 overflow-hidden'
           }
+          onClick={() => console.log(day)}
         >
           {dateRender ? (
             dateRender(day.date)
           ) : (
-            <div className="p-3">
-              <div className="calendar-month-body-cell-date-value">
+            <div className="p-3 cursor-pointer"  onClick={e => {
+              e.stopPropagation();
+              selectHandler?.(day.date)
+            }}>
+              <div className={
+                value.format('YYYY-MM-DD') === day.date.format('YYYY-MM-DD')
+                ? "bg-sky-500 text-white w-7 h-7 leading-7 rounded-full text-center cursor-pointer"
+                : "w-7 h-7 leading-7 rounded-full text-center "
+              }>
                 {day.date.date()}
               </div>
-              <div className="calendar-month-body-cell-date-content">
+              <div
+                className="calendar-month-body-cell-date-content"
+                >
                 {dateInnerContent?.(day.date)}
               </div>
+              <div>111</div>
             </div>
           )}
         </div>
@@ -79,12 +95,12 @@ function renderDays(
 
 function MonthCalendar(props: MonthCalendarProps) {
   const localeContext = useContext(LocaleContext);
-  const { dateRender, dateInnerContent } = props;
+  const { value, dateRender, dateInnerContent, selectHandler, curMonth } = props;
 
   const CalendarLocale = allLocales[localeContext.locale];
 
   const weekList = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
-  const allDays = getAllDays(props.value);
+  const allDays = getAllDays(curMonth);
 
   return (
     <div>
@@ -96,7 +112,7 @@ function MonthCalendar(props: MonthCalendarProps) {
             </div>
           ))}
         </div>
-        <div>{renderDays(allDays, dateRender, dateInnerContent)}</div>
+        <div>{renderDays(allDays, dateRender, dateInnerContent, value, selectHandler)}</div>
       </div>
     </div>
   );
