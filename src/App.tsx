@@ -19,7 +19,7 @@ const App = () => {
       <Calendar
         value={dayjs('2024-3-29')}
         onChange={(data: dayjs.Dayjs) => console.error(data.format('YYYY/MM/DD'))}
-        locale='en-US'
+        // locale='en-US'
         // dateInnerContent={(value) => {
         //   return (
         //     <div>
